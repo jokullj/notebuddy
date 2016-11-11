@@ -1,0 +1,208 @@
+
+/* Links */
+a,
+a:focus,
+a:hover {
+    color: #ffffff;
+}
+
+/* Custom buttons */
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+    color: #333333;
+    text-shadow: none; /* Prevent inheritance from `body` */
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+
+/*
+ * Main
+ */
+
+html,
+body {
+    height: 100%;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+.site-wrapper {
+    display: table;
+    width: 100%;
+    height: 100%; /* Firefox */
+    min-height: 100%;
+    background:url('notebook_backgr.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    box-shadow: inset 0 0 0 1000px rgba(64,64,90,.8);
+}
+
+.site-wrapper2 {
+    display: table;
+    width: 100%;
+    height: 100%; /* Firefox */
+    min-height: 100%;
+    background:url('notebook_backgr2.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    box-shadow: inset 0 0 0 1000px rgba(103,188,219,.8);
+}
+
+.site-wrapper-inner {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.main-container,
+.footer-container,
+.cover-container {
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+/* Padding for spacing */
+.inner {
+    margin: 20px;
+}
+.clear{
+    padding-bottom:150px;
+}
+
+/*
+ * Header
+ */
+
+.masthead-brand {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.masthead-nav > li {
+    display: inline-block;
+}
+.masthead-nav > li + li {
+    margin-left: 20px;
+}
+.masthead-nav > li > a {
+    padding-right: 0;
+    padding-left: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    border-bottom: 2px solid transparent;
+}
+.masthead-nav > li > a:hover,
+.masthead-nav > li > a:focus {
+    background-color: transparent;
+    border-bottom-color: #ffffff;
+}
+
+.mastfoot {
+    padding-top: 70px;
+    height:0px;
+    bottom: 0;
+}
+
+@media (min-width: 768px) {
+    .clear{
+        padding-top: 0px;
+        padding-bottom: 80px;
+    }
+
+    .masthead-brand {
+        float: left;
+    }
+    .masthead-nav {
+        float: right;
+    }
+    .masthead {
+        position: fixed;
+        top: 0;
+    }
+    .mastfoot {
+        padding-top: 260px;
+        height:0px;
+        bottom: 0;
+    }
+
+    .site-wrapper-inner {
+        vertical-align: middle;
+    }
+
+    .masthead,
+    .mastfoot,
+    .main-container,
+    .footer-container,
+    .cover-container {
+        width: 100%;
+    }
+}
+
+/*
+ * Cover
+ */
+
+.cover {
+    padding: 0 20px;
+}
+.cover .btn-lg {
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+/*
+ * Main
+ */
+
+.main {
+    padding: 0 20px;
+}
+.main .btn-lg {
+    padding: 10px 20px;
+    font-weight: bold;
+}
+/*
+ * Footer
+ */
+
+.mastfoot {
+    color: #999999; /* IE8 proofing */
+    color: rgba(255,255,255,.5);
+}
+
+/*
+ * Affix and center
+ */
+@media (min-width: 992px) {
+    .masthead,
+    .mastfoot,
+    .main-container,
+    .footer-container,
+    .cover-container {
+        width: 900px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .masthead,
+    .mastfoot,
+    .main-container,
+    .footer-container,
+    .cover-container {
+        width: 1000px;
+    }
+
+    .mastfoot {
+        padding-top: 250px;
+        height:0px;
+        bottom: 0;
+    }
