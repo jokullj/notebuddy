@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import project.persistence.entities.LoginInfo;
 import project.persistence.entities.User;
+import project.service.Implementation.SessionService;
 import project.service.Implementation.UserService;
 
 /**
@@ -16,9 +17,13 @@ import project.service.Implementation.UserService;
 @Controller
 public class UserController {
     UserService userService;
+    SessionService sessionService;
 
     @Autowired
-    public UserController(UserService userService) { this.userService = userService; }
+    public UserController(UserService userService) {
+        this.userService = userService;
+        sessionService = SessionService.getSessionService();
+    }
 
     //signup.jsp sýn er birt þegar farið er inn á /signup URLið.
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
@@ -50,9 +55,10 @@ public class UserController {
 
     //Reynt að skrá notanda inn, þegar notandi sendir POST request á /login URLi.
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginSubmit(@ModelAttribute LoginInfo loginInfo) {
+    public String loginSubmit(@ModelAttribute LoginInfo loginInfo, Model model) {
         //Ef að notandanafn og lykilorð er til í gagnagrunni þá er loginSuccess.jsp sýnin birt.
         if(userService.validateLogin(loginInfo)) {
+            model.addAttribute("user", sessionService.getActiveUser());
             return "loginSuccess";
         }
         //Ef að notandanafnið og lykilorðið finnst ekki í gagnagrunni þá er loginUnsuccess.jsp sýnin birt.

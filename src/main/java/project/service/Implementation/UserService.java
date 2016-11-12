@@ -12,10 +12,12 @@ import project.persistence.repositories.UserRepository;
 @Service
 public class UserService {
     UserRepository repository;
+    SessionService sessionService;
 
     @Autowired
     public UserService(UserRepository repository) {
         this.repository = repository;
+        sessionService = SessionService.getSessionService();
     }
 
     //Biður repository um að leita í gagnagrunni eftir notandanafni.
@@ -38,6 +40,10 @@ public class UserService {
         User result = repository.findByUsernameAndPassword(username, password);
 
         if (result == null) return false;
-        else return true;
+        else {
+            sessionService.setLoggedIn(true);
+            sessionService.setActiveUser(new User(username, password));
+            return true;
+        }
     }
 }

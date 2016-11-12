@@ -2,7 +2,10 @@ package project.persistence.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Torfi on 11/10/2016.
@@ -13,6 +16,9 @@ public class User {
     @Id
     private String username;
     private String password;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Group> groups;
 
     public User() {
     }

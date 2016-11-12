@@ -6,17 +6,19 @@
 <html lang="en">
 
 <head>
-    <title>NoteBuddy - Login Successful</title>
+    <title>NoteBuddy - Not logged in!</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
 
 <h1>Result</h1>
-<p>Username: ${loginInfo.username} and password: ${loginInfo.password} is a valid username/password combination.</p>
+<p>Oops! Seems like you are not logged in.</p>
 
-<p>Congratulations, your login was successful! You are now logged in as ${user.username}</p>
-<a href="/">Back to home page!</a>
+<a href="/login">Proceed to login page!</a>
+<a href="/signup">Proceed to signup page!</a>
+
+
 </body>
 <footer>Class HBV501G, University of Iceland, Fall 2016 - NoteBuddy</footer>
 </html>
