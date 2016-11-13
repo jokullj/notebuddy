@@ -13,6 +13,7 @@ public class Group {
     @Id
     private String name;
 
+    //The Group class has a many-to-many relationship with the User class, as defined here.
     @ManyToMany
     @JoinTable(
             name = "user_group",

@@ -17,6 +17,7 @@ public class User {
     private String username;
     private String password;
 
+    //The User class has a many-to-many relationship with the Group class, as defined here.
     @ManyToMany(mappedBy = "users")
     private List<Group> groups;
 

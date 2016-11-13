@@ -20,12 +20,10 @@ public class UserService {
         sessionService = SessionService.getSessionService();
     }
 
-    //Biður repository um að leita í gagnagrunni eftir notandanafni.
     public boolean userExists(String username) {
         return userRepository.exists(username);
     }
 
-    //Vistar nýjan notanda í gagnagrunni.
     public void createUser(User user) {
         userRepository.save(user);
     }
@@ -34,7 +32,6 @@ public class UserService {
         return userRepository.findOne(username);
     }
 
-    //Biður repository um að leita í gagnagrunni eftir notandanafni og lykilorði.
     public boolean validateLogin(LoginInfo loginInfo) {
         User result = userRepository.findByUsernameAndPassword(loginInfo.getUsername(), loginInfo.getPassword());
         if(result == null) return false;

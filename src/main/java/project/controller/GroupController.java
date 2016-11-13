@@ -35,8 +35,11 @@ public class GroupController {
         return "creategroup";
     }
 
+    //This method delegates the task of creating a new group to the groupService class.
     @RequestMapping(value = "/creategroup", method = RequestMethod.POST)
     public String createGroupSubmit(@ModelAttribute Group group) {
+        //If the user isn't logged in, or if a group with the chosen group name already exists,
+        //then do nothing, but inform the user that the group creation failed.
         if(!sessionService.isLoggedIn()) { return "nouser"; }
         if(groupService.groupExists(group.getName())) { return "groupexists"; }
 
@@ -53,8 +56,12 @@ public class GroupController {
         return "adduser";
     }
 
+    //This method handles the task of adding a user to a group.
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public String addUserToGroupSubmit(@ModelAttribute User_Group user_group, Model model) {
+        //First handle three erroneous cases, that is: user isn't logged in, group doesn't exist,
+        //user to be added doesn't exist. If any of those cases come up, then do nothing,
+        //but inform the user that adding a user to a group failed.
         if(!sessionService.isLoggedIn()) { return "nouser"; }
         if(!groupService.groupExists(user_group.getGroupName())) {
             model.addAttribute("groupName", user_group.getGroupName());
@@ -64,12 +71,11 @@ public class GroupController {
             return "usernotexists";
         }
 
+        //If the user is logged in, and the group and user to be added both exist, then add the user to the group.
         User user = userService.getUserByUsername(user_group.getUsername());
         Group group = groupService.getGroupByName(user_group.getGroupName());
         group.addUser(user);
         groupService.saveGroup(group);
         return "useradded";
     }
-
-
 }
