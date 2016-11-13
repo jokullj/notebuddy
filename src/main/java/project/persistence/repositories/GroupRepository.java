@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * Created by Torfi on 11/12/2016.
  */
-public interface GroupRepository extends JpaRepository<Group, Long> {
+public interface GroupRepository extends JpaRepository<Group, String> {
     Group save(Group group);
     void delete(Group group);
     List<Group> findAll();
 
-    Group findOne(Long id);
-    List<Group> findByName(String name);
+    Group findOne(String name);
+    boolean exists(String name);
 }

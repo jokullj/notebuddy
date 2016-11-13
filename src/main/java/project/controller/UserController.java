@@ -35,7 +35,7 @@ public class UserController {
     //Reynt að búa til nýjan user, þegar notandi sendir POST request á /signup URLi.
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signupSubmit(@ModelAttribute User user) {
-        if(userService.userExists(user)) {
+        if(userService.userExists(user.getUsername())) {
             //Ef að valið notandanafn er nú þegar til, er signupfailed-uae.jsp (useralreadyexists) sýnin birt.
             return "signupfailed-uae";
         }

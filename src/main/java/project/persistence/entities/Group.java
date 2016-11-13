@@ -49,4 +49,3 @@ public class Group {
         users.add(user);
     }
 }
-

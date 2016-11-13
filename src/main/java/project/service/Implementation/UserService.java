@@ -11,25 +11,27 @@ import project.persistence.repositories.UserRepository;
  */
 @Service
 public class UserService {
-    UserRepository repository;
+    UserRepository userRepository;
     SessionService sessionService;
 
     @Autowired
-    public UserService(UserRepository repository) {
-        this.repository = repository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
         sessionService = SessionService.getSessionService();
     }
 
     //Biður repository um að leita í gagnagrunni eftir notandanafni.
-    public boolean userExists(User user) {
-        User result = repository.findOne(user.getUsername());
-        if(result == null) return false;
-        else return true;
+    public boolean userExists(String username) {
+        return userRepository.exists(username);
     }
 
     //Vistar nýjan notanda í gagnagrunni.
     public void createUser(User user) {
-        repository.save(user);
+        userRepository.save(user);
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findOne(username);
     }
 
     //Biður repository um að leita í gagnagrunni eftir notandanafni og lykilorði.
@@ -37,7 +39,7 @@ public class UserService {
         String username = loginInfo.getUsername();
         String password = loginInfo.getPassword();
 
-        User result = repository.findByUsernameAndPassword(username, password);
+        User result = userRepository.findByUsernameAndPassword(username, password);
 
         if (result == null) return false;
         else {
