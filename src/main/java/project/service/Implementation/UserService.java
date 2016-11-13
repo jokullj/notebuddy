@@ -36,16 +36,8 @@ public class UserService {
 
     //Biður repository um að leita í gagnagrunni eftir notandanafni og lykilorði.
     public boolean validateLogin(LoginInfo loginInfo) {
-        String username = loginInfo.getUsername();
-        String password = loginInfo.getPassword();
-
-        User result = userRepository.findByUsernameAndPassword(username, password);
-
-        if (result == null) return false;
-        else {
-            sessionService.setLoggedIn(true);
-            sessionService.setActiveUser(new User(username, password));
-            return true;
-        }
+        User result = userRepository.findByUsernameAndPassword(loginInfo.getUsername(), loginInfo.getPassword());
+        if(result == null) return false;
+        else return true;
     }
 }

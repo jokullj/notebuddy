@@ -14,6 +14,7 @@ import project.service.Implementation.UserService;
 /**
  * Created by Torfi on 11/10/2016.
  */
+
 @Controller
 public class UserController {
     UserService userService;
@@ -25,43 +26,43 @@ public class UserController {
         sessionService = SessionService.getSessionService();
     }
 
-    //signup.jsp sýn er birt þegar farið er inn á /signup URLið.
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String signupForm(Model model) {
         model.addAttribute("user", new User());
         return "signup";
     }
 
-    //Reynt að búa til nýjan user, þegar notandi sendir POST request á /signup URLi.
+    //This method delegates the task of creating a new user to the userService class.
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signupSubmit(@ModelAttribute User user) {
+        //If the chosen username already exists, do nothing but inform the user that the signup failed.
         if(userService.userExists(user.getUsername())) {
-            //Ef að valið notandanafn er nú þegar til, er signupfailed-uae.jsp (useralreadyexists) sýnin birt.
             return "signupfailed-uae";
         }
+        //If the chosen username doesn't exist, create a new user.
         else {
-            //Ef að valið notandanafn er ekki til, er nýr user búinn til og signupcomplete.jsp sýnin birt.
             userService.createUser(user);
             return "signupcomplete";
         }
     }
 
-    //login.jsp sýn er birt þegar farið er inn á /login URLið.
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm(Model model) {
         model.addAttribute("loginInfo", new LoginInfo());
         return "login";
     }
 
-    //Reynt að skrá notanda inn, þegar notandi sendir POST request á /login URLi.
+    //This method delegates the task of logging in a user to the userService class.
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginSubmit(@ModelAttribute LoginInfo loginInfo, Model model) {
-        //Ef að notandanafn og lykilorð er til í gagnagrunni þá er loginSuccess.jsp sýnin birt.
+        //If the submitted username and password match, then log the user in.
         if(userService.validateLogin(loginInfo)) {
+            sessionService.setLoggedIn(true);
+            sessionService.setActiveUser(new User(loginInfo.getUsername(), loginInfo.getPassword()));
             model.addAttribute("user", sessionService.getActiveUser());
             return "loginSuccess";
         }
-        //Ef að notandanafnið og lykilorðið finnst ekki í gagnagrunni þá er loginUnsuccess.jsp sýnin birt.
+        //If the submitted username and password don't match, do nothing but inform the user that the login failed.
         else return "loginUnsuccess";
     }
 }
