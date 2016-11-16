@@ -1,9 +1,6 @@
 package project.persistence.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class User {
     private String password;
 
     //The User class has a many-to-many relationship with the Group class, as defined here.
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users", cascade = CascadeType.ALL)
     private List<Group> groups;
 
     public User() {
@@ -34,5 +31,9 @@ public class User {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public List<Group> getGroups() {
+        return groups;
+    }
 
 }

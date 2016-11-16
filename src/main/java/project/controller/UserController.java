@@ -11,6 +11,8 @@ import project.persistence.entities.User;
 import project.service.Implementation.SessionService;
 import project.service.Implementation.UserService;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by Torfi on 11/10/2016.
  */
@@ -54,12 +56,17 @@ public class UserController {
 
     //This method delegates the task of logging in a user to the userService class.
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginSubmit(@ModelAttribute LoginInfo loginInfo, Model model) {
+    public String loginSubmit(@ModelAttribute LoginInfo loginInfo, Model model,
+                              HttpSession session) {
         //If the submitted username and password match, then log the user in.
         if(userService.validateLogin(loginInfo)) {
-            sessionService.setLoggedIn(true);
-            sessionService.setActiveUser(new User(loginInfo.getUsername(), loginInfo.getPassword()));
-            model.addAttribute("user", sessionService.getActiveUser());
+
+            session.setAttribute("isLoggedIn", true);
+            session.setAttribute("activeUser", userService.getUserByUsername(loginInfo.getUsername()));
+            model.addAttribute("user", session.getAttribute("activeUser"));
+            //sessionService.setLoggedIn(true);
+            //sessionService.setActiveUser(userService.getUserByUsername(loginInfo.getUsername()));
+            //model.addAttribute("user", sessionService.getActiveUser());
             return "loginSuccess";
         }
         //If the submitted username and password don't match, do nothing but inform the user that the login failed.

@@ -40,7 +40,7 @@ public class GroupController {
     public String createGroupSubmit(@ModelAttribute Group group) {
         //If the user isn't logged in, or if a group with the chosen group name already exists,
         //then do nothing, but inform the user that the group creation failed.
-        if(!sessionService.isLoggedIn()) { return "nouser"; }
+        if(!sessionService.isLoggedIn()) { return "notloggedin"; }
         if(groupService.groupExists(group.getName())) { return "groupexists"; }
 
         //If user is logged in and the chosen group name is available, create the group.
@@ -62,7 +62,7 @@ public class GroupController {
         //First handle three erroneous cases, that is: user isn't logged in, group doesn't exist,
         //user to be added doesn't exist. If any of those cases come up, then do nothing,
         //but inform the user that adding a user to a group failed.
-        if(!sessionService.isLoggedIn()) { return "nouser"; }
+        if(!sessionService.isLoggedIn()) { return "notloggedin"; }
         if(!groupService.groupExists(user_group.getGroupName())) {
             model.addAttribute("groupName", user_group.getGroupName());
             return "groupnotexists"; }

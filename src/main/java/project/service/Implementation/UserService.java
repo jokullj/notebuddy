@@ -2,9 +2,12 @@ package project.service.Implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import project.persistence.entities.Group;
 import project.persistence.entities.LoginInfo;
 import project.persistence.entities.User;
 import project.persistence.repositories.UserRepository;
+
+import java.util.ArrayList;
 
 /**
  * Created by Torfi on 11/10/2016.
